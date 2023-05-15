@@ -28,8 +28,10 @@ function result() {
         handleTooManyMatchesFound();
       } else if (data.length >= 2 && data.length <= 10) {
         renderCountryList(data);
+        console.log(1);
       } else if (data.length === 1) {
         createCountryCard(data);
+        console.log(2);
       } else {
         Notiflix.Notify.failure('Oops, something went wronga!');
       }
@@ -49,8 +51,8 @@ function renderCountryList(data) {
   refs.countriListEl.innerHTML = ``;
   refs.countriListEl.innerHTML = data
     .map(({ flags, name }) => {
-      `<li class="list-item">
-  <img src="${flags.svg}" alt="${flags.alt}">
+      return `<li class="list-item">
+  <img src="${flags.svg}" width="50" height="30" alt="${flags.alt}">
   <h2 class="item-title">${name.official}</h2>
 </li>`;
     })
@@ -61,14 +63,12 @@ function renderCountryList(data) {
 function createCountryCard(data) {
   refs.countryInfoEl.innerHTML = data
     .map(({ capital, flags, languages, name, population }) => {
-      `<img src="${flags.svg}" alt="${flags.alt}">
+      return `<img src="${flags.svg}" width="70" height="50" alt="${flags.alt}">
 <h2>${name.common} (${name.official})</h2>
 <p>Capital: ${capital}</p>
 <p>Population: ${population.toLocaleString()}</p>
-<p>Languages: ${languages}</p>`;
+<p>Languages: ${Object.values(languages).join(', ')}</p>`;
     })
     .join('');
   refs.countriListEl.innerHTML = '';
 }
-//Якщо користувач повністю очищає поле пошуку, то HTTP-запит не виконується,
-//а розмітка списку країн або інформації про країну зникає.
