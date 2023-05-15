@@ -31,11 +31,12 @@ function result() {
       } else if (data.length === 1) {
         createCountryCard(data);
       } else {
-        Notiflix.Notify.failure('Oops, something went wrong!');
+        Notiflix.Notify.failure('Oops, something went wronga!');
       }
     })
     .catch(error => {
       Notiflix.Notify.failure('Oops, something went wrong!');
+      console.log(error);
     });
 }
 
@@ -46,7 +47,7 @@ function handleTooManyMatchesFound() {
 }
 function renderCountryList(data) {
   refs.countriListEl.innerHTML = ``;
-  refs.countriListEl = data
+  refs.countriListEl.innerHTML = data
     .map(({ flags, name }) => {
       `<li class="list-item">
   <img src="${flags.svg}" alt="${flags.alt}">
@@ -64,7 +65,7 @@ function createCountryCard(data) {
 <h2>${name.common} (${name.official})</h2>
 <p>Capital: ${capital}</p>
 <p>Population: ${population.toLocaleString()}</p>
-<p>Languages: ${languages.join(', ')}</p>`;
+<p>Languages: ${languages}</p>`;
     })
     .join('');
   refs.countriListEl.innerHTML = '';
