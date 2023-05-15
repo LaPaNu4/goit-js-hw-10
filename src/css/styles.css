@@ -18,3 +18,8 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+input {
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 500px;
+}
